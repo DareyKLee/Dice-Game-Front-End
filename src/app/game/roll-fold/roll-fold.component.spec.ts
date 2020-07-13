@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RollFoldComponent } from './roll-fold.component';
+import { GameStateService } from '../game-state.service';
+import { MockGameStateService } from '../mocks/MockGameStateService.mock';
 
 describe('RollFoldComponent', () => {
   let component: RollFoldComponent;
@@ -8,7 +10,10 @@ describe('RollFoldComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RollFoldComponent ]
+      declarations: [ RollFoldComponent ],
+      providers: [
+        { provide: GameStateService, useClass: MockGameStateService }
+      ]
     })
     .compileComponents();
   }));

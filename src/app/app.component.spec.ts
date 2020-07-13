@@ -1,14 +1,29 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, fakeAsync, tick } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Location } from '@angular/common';
+import { appRoutes } from './app-routing.module';
+import { Router } from '@angular/router';
 
 describe('AppComponent', () => {
+  let router: Router;
+  let location: Location;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule.withRoutes(appRoutes)],
       declarations: [
         AppComponent
       ],
     }).compileComponents();
   }));
+
+  beforeEach(() => {
+    router = TestBed.get(Router);
+    location = TestBed.get(Location);
+
+    router.initialNavigation();
+  })
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
@@ -16,16 +31,17 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'dice-game'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('dice-game');
-  });
+  it(`should redirect '' to '/rules'`, fakeAsync(() => {
+    router.navigate(['']);
+    tick();
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('dice-game app is running!');
-  });
+    expect(location.path()).toBe('/rules');
+  }))
+
+  it(`should redirect non recognized routes to 'rules'`, fakeAsync(() => {
+    router.navigate(['unrecognized']);
+    tick();
+
+    expect(location.path()).toBe('/rules');
+  }))
 });

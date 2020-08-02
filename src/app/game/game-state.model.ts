@@ -4,4 +4,5 @@ export class GameStateModel {
     bet: number;
     player: number;
     opponent: number;
+    playerTurn: boolean = false;
 }

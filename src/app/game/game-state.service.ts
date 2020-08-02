@@ -1,43 +1,64 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { GameStateModel } from './game-state.model';
 import { HttpClient } from '@angular/common/http';
+import * as io from 'socket.io-client';
 
 @Injectable({providedIn: 'root'})
-export class GameStateService {
-    constructor(private gameStateModel: GameStateModel, private httpClient: HttpClient){}
+export class GameStateService {    
+    private playerSocket;
+
+    constructor(private gameStateModel: GameStateModel, private httpClient: HttpClient) {
+        this.playerSocket = io.connect('http://localhost:8081');
+
+        this.playerSocket.on('message', (message) => {
+            console.log(message);
+
+            switch(message) {
+                case 'LOST GAME':
+                    alert('LOST THE GAME');
+
+                    location.reload();
+
+                    break;
+                case 'WON GAME':
+                    alert('WON THE GAME');
+
+                    location.reload();
+
+                    break;
+                case 'LOST ROUND':
+                    alert('LOST THE ROUND');
+
+                    break;
+                case 'WON ROUND':
+                    alert('WON THE ROUND');
+
+                    break;
+                default:
+                    this.updateGameState(message);
+            }
+        })
+    }
 
     roll(){
-        this.httpClient.get(
-            '#####/roll'
-        )
-        .subscribe(gameStateData => {
-            this.updateGameState(gameStateData);
-        })
+        this.gameStateModel.playerTurn = !this.gameStateModel.playerTurn;
+
+        this.playerSocket.send('ROLL');
     }
 
     fold() {
-        this.httpClient.get(
-            '#####/fold'
-        ).subscribe(gameStateData => {
-            this.updateGameState(gameStateData);
-        })
-    }
+        this.gameStateModel.playerTurn = !this.gameStateModel.playerTurn;
 
-    setUpNewGame() {
-        this.httpClient.get(
-            '#####/new-game'
-        )
-        .subscribe(gameStartData => {
-            this.updateGameState(gameStartData);
-        })
+        this.playerSocket.send('FOLD');
     }
 
     updateGameState(gameStateData) {
         this.gameStateModel.dice = gameStateData.dice;
         this.gameStateModel.pot = gameStateData.pot;
         this.gameStateModel.bet = gameStateData.bet;
-        this.gameStateModel.player = gameStateData.player;
-        this.gameStateModel.opponent = gameStateData.opponent;
+        this.gameStateModel.player = gameStateData.playerGold;
+        this.gameStateModel.opponent = gameStateData.opponentGold;
+        this.gameStateModel.playerTurn = gameStateData.playerTurn;
     }
 
     get dice() {

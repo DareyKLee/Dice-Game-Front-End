@@ -12,6 +12,7 @@ import { BetComponent } from './game/bet/bet.component';
 import { PlayerComponent } from './game/player/player.component';
 import { OpponentComponent } from './game/opponent/opponent.component';
 import { RollFoldComponent } from './game/roll-fold/roll-fold.component';
+import { GameStateModel } from './game/game-state.model';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { RollFoldComponent } from './game/roll-fold/roll-fold.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [GameStateModel],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

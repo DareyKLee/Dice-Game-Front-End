@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GameStateModel } from '../game-state.model';
 
 @Component({
   selector: 'app-bet',
@@ -6,9 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['../shared/gameInterface.css']
 })
 export class BetComponent implements OnInit {
-  betPoints: number = 0;
-
-  constructor() { }
+  constructor(public gameStateModel: GameStateModel) { }
 
   ngOnInit(): void {
   }

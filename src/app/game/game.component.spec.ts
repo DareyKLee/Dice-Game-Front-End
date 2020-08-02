@@ -37,7 +37,6 @@ describe('GameComponent', () => {
     fixture = TestBed.createComponent(GameComponent);
     component = fixture.componentInstance;
     mockGameStateService = TestBed.get(GameStateService);
-    spyOn(mockGameStateService, 'setUpNewGame').and.callThrough();
     
     fixture.detectChanges();
   });
@@ -46,9 +45,9 @@ describe('GameComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call setUpNewGame from GameStateService', () => {
-    expect(mockGameStateService.setUpNewGame).toHaveBeenCalled();
-  })
+  // it('should call setUpNewGame from GameStateService', () => {
+    
+  // })
 
   it('should render game board components', () => {
     const compiled = fixture.debugElement.nativeElement;

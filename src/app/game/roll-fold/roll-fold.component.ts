@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameStateService } from '../game-state.service';
+import { GameStateModel } from '../game-state.model';
 
 @Component({
   selector: 'app-roll-fold',
@@ -8,7 +9,7 @@ import { GameStateService } from '../game-state.service';
 })
 export class RollFoldComponent implements OnInit {
 
-  constructor(private gameStateService: GameStateService) { }
+  constructor(public gameStateModel: GameStateModel, private gameStateService: GameStateService) { }
 
   ngOnInit(): void {
   }

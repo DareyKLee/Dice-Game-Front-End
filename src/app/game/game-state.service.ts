@@ -8,7 +8,7 @@ export class GameStateService {
     private playerSocket;
 
     constructor(private gameStateModel: GameStateModel, private httpClient: HttpClient) {
-        this.playerSocket = io.connect('http://localhost:8081');
+        this.playerSocket = io.connect('https://still-bastion-63509.herokuapp.com/');
 
         this.playerSocket.on('message', (message) => {
             console.log(message);

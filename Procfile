@@ -1,0 +1,1 @@
+web:npm start --max_old_space_size=460

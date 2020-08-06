@@ -5,13 +5,13 @@ app.use(express.static(__dirname + '/dist/dice-game'));
 
 app.get('/game', function(req, res) {
     res.sendFile(path.join(__dirname +
-        '/dist/dice-game/game.component.html'));
+        '/dist/dice-game/game/game.component.html'));
     }
 )
 
 app.get('/rules', function(req, res) {
     res.sendFile(path.join(__dirname +
-        '/dist/dice-game/rules.component.html'));
+        '/dist/dice-game/rules/rules.component.html'));
     }
 )
 

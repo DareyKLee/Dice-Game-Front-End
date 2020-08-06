@@ -6,7 +6,7 @@ let router = express.Router();
 
 // app.use(express.static(__dirname + '/dist/dice-game'));
 app.use('/*', router);
-app.get('/*', function(req, res) {
+router.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname +
         '/dist/dice-game/app.component.html'));
     }

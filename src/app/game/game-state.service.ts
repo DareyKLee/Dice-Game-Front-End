@@ -9,6 +9,7 @@ export class GameStateService {
 
     constructor(private gameStateModel: GameStateModel, private httpClient: HttpClient) {
         this.playerSocket = io.connect('https://still-bastion-63509.herokuapp.com/');
+        // this.playerSocket = io.connect('http://localhost:8081');
 
         this.playerSocket.on('message', (message) => {
             console.log(message);
@@ -32,6 +33,11 @@ export class GameStateService {
                     break;
                 case 'WON ROUND':
                     alert('WON THE ROUND');
+
+                    break;
+                case 'OPPONENT DISCONNECTED':
+                    alert('OPPONENT HAS DISCONNECTED');
+                    location.reload();
 
                     break;
                 default:

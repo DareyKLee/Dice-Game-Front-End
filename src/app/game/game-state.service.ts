@@ -1,18 +1,19 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { GameStateModel } from './game-state.model';
-import { HttpClient } from '@angular/common/http';
 import * as io from 'socket.io-client';
 
 @Injectable({providedIn: 'root'})
 export class GameStateService {    
     private playerSocket;
+    public gameStarted = false;
 
-    constructor(private gameStateModel: GameStateModel, private httpClient: HttpClient) {
+    constructor(private gameStateModel: GameStateModel) {
         this.playerSocket = io.connect('https://still-bastion-63509.herokuapp.com/');
         // this.playerSocket = io.connect('http://localhost:8081');
 
         this.playerSocket.on('message', (message) => {
             console.log(message);
+            this.gameStarted = true;
 
             switch(message) {
                 case 'LOST GAME':
@@ -65,25 +66,5 @@ export class GameStateService {
         this.gameStateModel.player = gameStateData.playerGold;
         this.gameStateModel.opponent = gameStateData.opponentGold;
         this.gameStateModel.playerTurn = gameStateData.playerTurn;
-    }
-
-    get dice() {
-        return this.gameStateModel.dice;
-    }
-
-    get pot() {
-        return this.gameStateModel.pot;
-    }
-
-    get bet() {
-        return this.gameStateModel.bet;
-    }
-
-    get player() {
-        return this.gameStateModel.player;
-    }
-
-    get opponent() {
-        return this.gameStateModel.opponent;
     }
 }

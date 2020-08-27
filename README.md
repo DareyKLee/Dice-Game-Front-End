@@ -1,27 +1,28 @@
-# DiceGame
+# DICE GAME
+To access the Don't Roll One game web application, visit https://dont-roll-one.herokuapp.com.  
+(open multiple tabs of the same page to play against yourself to see how the application works)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.6.
+## FRONT END
+This repository contains the user interface of the web application.  
+There is no game logic placed here as it is all handled on the back end.
 
-## Development server
+## FUNCTIONALITY
+From the "rules" page, clicking the START GAME button changes to the "game" page where a socket connection is established with the server.  
+The player may have to wait for an opponent to connect to the server before a new game session is created for them.  
+  
+Upon the creation of a new game session the server sends a message containing the default game state to the relevant player sockets.  
+These game state messages are used to update the model representing the game state on the client side, which is then portrayed in the template visible to the player.  
+  
+The ROLL and FOLD buttons on the user interface sends a message to the server corresponding to the player's requested action.  
+The server performs the action and sends the updated game state to the relevant player sockets.  
+  
+A game session concludes when there is a winner or when a player disconnects from the session.  
+When the session concludes, the "game" page is reloaded which restarts the process of a player connecting to the server to get in a new game session.  
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## FRAMEWORKS UTILIZED
+Angular  
+Socket.IO  
+Express.js  
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## DEPLOYMENT
+Deployed on Heroku

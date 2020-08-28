@@ -1,2 +1,2 @@
-<button class="btn btn-success btn-lg" (click)="roll()" [disabled]="!gameStateModel.playerTurn">ROLL</button> |
-<button class="btn btn-danger btn-lg" (click)="fold()" [disabled]="!gameStateModel.playerTurn">FOLD</button>
+<button class="btn btn-success btn-lg" (click)="roll()" [disabled]="!gameStateService.playerTurn">ROLL</button> |
+<button class="btn btn-danger btn-lg" (click)="fold()" [disabled]="!gameStateService.playerTurn">FOLD</button>

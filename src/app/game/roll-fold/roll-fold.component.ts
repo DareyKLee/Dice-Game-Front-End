@@ -9,7 +9,7 @@ import { GameStateModel } from '../game-state.model';
 })
 export class RollFoldComponent implements OnInit {
 
-  constructor(public gameStateModel: GameStateModel, private gameStateService: GameStateService) { }
+  constructor(public gameStateService: GameStateService) { }
 
   ngOnInit(): void {
   }

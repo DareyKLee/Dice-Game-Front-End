@@ -67,4 +67,28 @@ export class GameStateService {
         this.gameStateModel.opponent = gameStateData.opponentGold;
         this.gameStateModel.playerTurn = gameStateData.playerTurn;
     }
+
+    get dice() {
+        return this.gameStateModel.dice;
+    }
+
+    get pot() {
+        return this.gameStateModel.pot;
+    }
+
+    get bet() {
+        return this.gameStateModel.bet;
+    }
+
+    get player() {
+        return this.gameStateModel.player;
+    }
+
+    get opponent() {
+        return this.gameStateModel.opponent;
+    }
+
+    get playerTurn() {
+        return this.gameStateModel.playerTurn;
+    }
 }

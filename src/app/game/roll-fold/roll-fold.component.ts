@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { GameStateService } from '../game-state.service';
-import { GameStateModel } from '../game-state.model';
 
 @Component({
   selector: 'app-roll-fold',

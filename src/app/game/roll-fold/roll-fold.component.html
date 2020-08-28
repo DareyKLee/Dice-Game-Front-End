@@ -1,2 +1,10 @@
-<button class="btn btn-success btn-lg" (click)="roll()" [disabled]="!gameStateModel.playerTurn">ROLL</button> |
-<button class="btn btn-danger btn-lg" (click)="fold()" [disabled]="!gameStateModel.playerTurn">FOLD</button>
+<div *ngIf="gameStateService.playerTurn; then playerTurn; else opponentTurn"></div>
+
+<ng-template #playerTurn>
+    <button class="btn btn-success btn-lg" (click)="roll()">ROLL</button> |
+    <button class="btn btn-danger btn-lg" (click)="fold()" >FOLD</button>
+</ng-template>
+
+<ng-template #opponentTurn>
+    <h2>Opponent's Turn</h2>
+</ng-template>

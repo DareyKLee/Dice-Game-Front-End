@@ -1,17 +1,30 @@
-<div class="text-center">
-    <app-dice></app-dice>
-    <app-pot></app-pot>
-    <app-bet></app-bet>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-6">
-                <app-player></app-player>
-            </div>
-            <div class="col-xs-6">
-                <app-opponent></app-opponent>
+<div *ngIf="gameStateService.gameStarted; then inGame; else waitingForOpponent"></div>
+
+<ng-template #inGame>
+    <div class="text-center">
+        <app-dice></app-dice>
+        <app-pot></app-pot>
+        <app-bet></app-bet>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6">
+                    <app-player></app-player>
+                </div>
+                <div class="col-xs-6">
+                    <app-opponent></app-opponent>
+                </div>
             </div>
         </div>
+        <app-roll-fold></app-roll-fold>
     </div>
-    <app-roll-fold></app-roll-fold>
-</div>
+</ng-template>
+
+<ng-template #waitingForOpponent>
+    <div class="center">
+        <h2>WAITING FOR AN OPPONENT</h2>
+    </div>
+    <div class="center">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+</ng-template>
 
